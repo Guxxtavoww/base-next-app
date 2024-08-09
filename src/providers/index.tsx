@@ -1,5 +1,6 @@
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { ThemeProviderProps } from 'next-themes/dist/types';
+import { HydrationOverlay } from '@builder.io/react-hydration-overlay';
 
 import { TooltipProvider } from '@/components/ui/tooltip';
 
@@ -10,10 +11,12 @@ export function Providers({
   ...props
 }: WithChildren<ThemeProviderProps>) {
   return (
-    <TanstackProvider>
-      <NextThemesProvider {...props}>
-        <TooltipProvider>{children}</TooltipProvider>
-      </NextThemesProvider>
-    </TanstackProvider>
+    <HydrationOverlay>
+      <TanstackProvider>
+        <NextThemesProvider {...props}>
+          <TooltipProvider>{children}</TooltipProvider>
+        </NextThemesProvider>
+      </TanstackProvider>
+    </HydrationOverlay>
   );
 }
