@@ -26,6 +26,7 @@ export interface DateInputFieldProps {
   disabled?: boolean;
   defaultValue?: Date | string;
   label?: string;
+  // eslint-disable-next-line no-unused-vars
   disableCalendarFn?: (date: Date) => boolean;
   isRequired?: boolean;
   dateFormat?: Formats;
