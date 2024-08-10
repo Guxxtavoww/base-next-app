@@ -12,17 +12,17 @@ import { ToastAction, type ToastActionElement } from '@/components/ui/toast';
 
 import { useToast } from './use-toast.hook';
 
-export type UseMutationWithToastOptions<
+export interface UseMutationWithToastOptions<
   TData = unknown,
   TError = DefaultError,
   TVariables = void,
   TContext = unknown
-> = UseMutationOptions<TData, TError, TVariables, TContext> & {
+> extends UseMutationOptions<TData, TError, TVariables, TContext> {
   toastCustomError?: string;
   toastCustomSuccessMessage?: string;
   toastAction?: ToastActionElement;
   retryLimit?: number;
-};
+}
 
 export function useMutationWithToast<
   TData = unknown,
