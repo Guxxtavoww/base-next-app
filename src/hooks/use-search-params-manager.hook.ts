@@ -28,6 +28,7 @@ export type UseSearchParamsManagerReturnType<T extends string> = Readonly<{
    * @param key - The name of the query parameter.
    * @param value - The value that will be set in the url.
    */
+  // eslint-disable-next-line no-unused-vars
   setSearchParam: (key: T, value: string) => void;
   /**
    * Retrieves the value of a query parameter. If the parameter is not present,
@@ -36,6 +37,7 @@ export type UseSearchParamsManagerReturnType<T extends string> = Readonly<{
    * @param key - The name of the query parameter.
    * @returns The value of the query parameter or its default value.
    */
+  // eslint-disable-next-line no-unused-vars
   getSearchParamValue: (key: T) => Maybe<string>;
   /**
    * Retrieves all query parameters and their values.

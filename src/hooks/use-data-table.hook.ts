@@ -18,7 +18,7 @@ import {
 } from '@tanstack/react-table';
 import { z } from 'zod';
 
-import { useDebounce } from '@/hooks/use-debounce';
+import { useDebounce } from '@/hooks/use-debounce.hook';
 import { optionalStringSchema, optionalStringToNumberSchema } from '@/utils/zod.utils';
 
 import { useSearchParamsManager } from './use-search-params-manager.hook'; 
@@ -177,11 +177,11 @@ export function useDataTable<TData>({
     }
 
     for (const column of debouncedSearchableColumnFilters) {
-      setSearchParam(column.id, column.value as string);
+      setSearchParam(column.id as any, column.value as string);
     }
 
     for (const column of filterableColumnFilters) {
-      setSearchParam(column.id, column.value.join('.'));
+      setSearchParam(column.id as any, new Array(column.value).join('.'));
     }
 
     table.setPageIndex(0);
