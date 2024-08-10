@@ -4,13 +4,13 @@ import { useLayoutEffect, useState } from 'react';
 
 import { useMediaQuery } from './use-media-query.hook';
 
-type Breakpoints = {
+interface Breakpoints {
   isXs: boolean;
   isSm: boolean;
   isMd: boolean;
   isLg: boolean;
   active: 'SSR' | 'xs' | 'sm' | 'md' | 'lg';
-};
+}
 
 export function useBreakpoints(): Breakpoints {
   const [isClient, setIsClient] = useState<boolean>(false);

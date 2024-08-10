@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { z } from 'zod';
 import {
   getCoreRowModel,
   getFacetedRowModel,
@@ -16,23 +16,27 @@ import {
   type TableState,
   type VisibilityState,
 } from '@tanstack/react-table';
-import { z } from 'zod';
+import { useState, useMemo, useEffect } from 'react';
 
+import {
+  optionalStringSchema,
+  optionalStringToNumberSchema,
+} from '@/utils/zod.utils';
 import { useDebounce } from '@/hooks/use-debounce.hook';
-import { optionalStringSchema, optionalStringToNumberSchema } from '@/utils/zod.utils';
 
-import { useSearchParamsManager } from './use-search-params-manager.hook'; 
+import { useSearchParamsManager } from './use-search-params-manager.hook';
 
-interface UseDataTableProps<TData>
-  extends Omit<
-      TableOptions<TData>,
-      | 'pageCount'
-      | 'getCoreRowModel'
-      | 'manualFiltering'
-      | 'manualPagination'
-      | 'manualSorting'
-    >,
-    Required<Pick<TableOptions<TData>, 'pageCount'>> {
+type UseDataTablePropsExteds<TData> = Omit<
+  TableOptions<TData>,
+  | 'pageCount'
+  | 'getCoreRowModel'
+  | 'manualFiltering'
+  | 'manualPagination'
+  | 'manualSorting'
+> &
+  Required<Pick<TableOptions<TData>, 'pageCount'>>;
+
+interface UseDataTableProps<TData> extends UseDataTablePropsExteds<TData> {
   filterFields?: DataTableFilterField<TData>[];
   enableAdvancedFilter?: boolean;
   initialState?: Omit<Partial<TableState>, 'sorting'> & {
@@ -55,23 +59,22 @@ export function useDataTable<TData>({
   enableAdvancedFilter = false,
   ...props
 }: UseDataTableProps<TData>) {
-  const { setSearchParam, getAllParamsValues } =
-    useSearchParamsManager([
-      { key: 'page', defaultValue: '1' },
-      { key: 'limit' },
-      { key: 'sort' },
-    ]);
+  const { setSearchParam, getAllParamsValues } = useSearchParamsManager([
+    { key: 'page', defaultValue: '1' },
+    { key: 'limit' },
+    { key: 'sort' },
+  ]);
 
   // Search params
   const search = searchParamsSchema.parse(getAllParamsValues());
   const page = search.page;
-  const perPage =
-    search.limit ?? props.initialState?.pagination?.pageSize ?? 10;
+  const limit = search.limit ?? props.initialState?.pagination?.pageSize ?? 10;
   const sort =
     search.sort ??
     `${props.initialState?.sorting?.[0]?.id}.${
       props.initialState?.sorting?.[0]?.desc ? 'desc' : 'asc'
     }`;
+
   const [column, order] = sort?.split('.') ?? [];
 
   const { searchableColumns, filterableColumns } = useMemo(() => {
@@ -88,6 +91,7 @@ export function useDataTable<TData>({
         const filterableColumn = filterableColumns.find(
           (column) => column.value === key
         );
+
         const searchableColumn = searchableColumns.find(
           (column) => column.value === key
         );
@@ -111,17 +115,14 @@ export function useDataTable<TData>({
   }, [filterableColumns, searchableColumns, getAllParamsValues]);
 
   // Table states
-  const [rowSelection, setRowSelection] = useState({});
-  const [columnVisibility, setColumnVisibility] =
-    useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] =
     useState<ColumnFiltersState>(initialColumnFilters);
-
-  const [{ pageIndex, pageSize }, setPagination] =
-    useState<PaginationState>({
-      pageIndex: page - 1,
-      pageSize: perPage,
-    });
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: page - 1,
+    pageSize: limit,
+  });
 
   const pagination = useMemo(
     () => ({
@@ -147,7 +148,6 @@ export function useDataTable<TData>({
         ? `${sorting[0]?.id}.${sorting[0]?.desc ? 'desc' : 'asc'}`
         : ''
     );
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex, pageSize, sorting]);
 
@@ -166,26 +166,22 @@ export function useDataTable<TData>({
     return filterableColumns.find((column) => column.value === filter.id);
   });
 
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
     if (enableAdvancedFilter) return;
 
-    if (!mounted) {
-      setMounted(true);
-      return;
-    }
+    if (!mounted) return setMounted(true);
 
     for (const column of debouncedSearchableColumnFilters) {
       setSearchParam(column.id as any, column.value as string);
     }
 
     for (const column of filterableColumnFilters) {
-      setSearchParam(column.id as any, new Array(column.value).join('.'));
+      setSearchParam(column.id as any, (column.value as Array<any>).join('.'));
     }
 
     table.setPageIndex(0);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -221,5 +217,5 @@ export function useDataTable<TData>({
     manualFiltering: true,
   });
 
-  return { table };
+  return table;
 }
