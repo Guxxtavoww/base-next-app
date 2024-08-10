@@ -30,8 +30,8 @@ export function useMutationWithToast<
   TVariables = void,
   TContext = unknown
 >({
-  toastCustomSuccessMessage = 'Operation completed successfully!',
-  toastCustomError = 'An error occurred during the operation.',
+  toastCustomSuccessMessage = 'Operação concluída com sucesso!',
+  toastCustomError = 'Ocorreu um erro durante a operação.',
   toastAction,
   onSuccess,
   onError,
@@ -61,8 +61,8 @@ export function useMutationWithToast<
     onError: (error, variables, context) => {
       if (retriesCountRef.current >= retryLimit) {
         toast({
-          title: 'Retry attempts exceeded',
-          description: `You have reached the maximum retry limit of ${retryLimit}.`,
+          title: 'Tentativas de repetição excedidas',
+          description: `Você atingiu o limite máximo de tentativas de ${retryLimit}.`,
         });
 
         return onError?.(error, variables, context);
@@ -75,7 +75,7 @@ export function useMutationWithToast<
       } else {
         description = (
           <>
-            <strong>Unexpected Error:</strong>
+            <strong>Error:</strong>
             <pre>{JSON.stringify(error, null, 2)}</pre>
           </>
         );
@@ -89,10 +89,10 @@ export function useMutationWithToast<
         description,
         action: toastAction ?? (
           <ToastAction
-            altText="Try again"
+            altText="Tente de novo"
             onClick={() => mutationResult.mutateAsync(variables)}
           >
-            Try again
+            Tente de novo
           </ToastAction>
         ),
       });
