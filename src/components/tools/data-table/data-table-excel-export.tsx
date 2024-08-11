@@ -7,7 +7,7 @@ import type { Table } from '@tanstack/react-table';
 import { cn } from '@/utils/cn.util';
 import { Button } from '@/components/ui/button';
 
-import { Icon } from '../icon';
+import { LucideIcon } from '../lucide-icon';
 import { CustomTooltip } from '../custom-tooltip';
 
 interface DataTableExcelExportProps<T> {
@@ -38,7 +38,7 @@ export function DataTableExcelExport<T>({
         variant="outline"
         onClick={exportToExcel}
       >
-        <Icon icon={ArrowRightFromLine} size="sm" />
+        <LucideIcon icon={ArrowRightFromLine} size="sm" />
         Exportar
       </Button>
     </CustomTooltip>

@@ -6,7 +6,7 @@ import {
 import type { LucideProps } from 'lucide-react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const iconVariants = cva('fade-in-10 transition-all select-none', {
+const lucideIconVariants = cva('fade-in-10 transition-all select-none', {
   variants: {
     size: {
       default: 'h-4.5 w-4.5',
@@ -21,20 +21,21 @@ const iconVariants = cva('fade-in-10 transition-all select-none', {
   },
 });
 
-export type IconType = ForwardRefExoticComponent<
+export type LucideIconType = ForwardRefExoticComponent<
   Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
 >;
 
-interface iIconProps extends VariantProps<typeof iconVariants> {
+interface iLucideIconProps extends VariantProps<typeof lucideIconVariants> {
   className?: string;
-  icon: IconType;
+  icon: LucideIconType;
 }
 
-export const Icon = forwardRef<SVGSVGElement, iIconProps>(
-  ({ icon: IconProps, className, size }, ref) => {
-    return (
-      <IconProps className={iconVariants({ className, size })} ref={ref} />
-    );
-  }
+export const LucideIcon = forwardRef<SVGSVGElement, iLucideIconProps>(
+  ({ icon: PropLucideIcon, className, size }, ref) => (
+    <PropLucideIcon
+      className={lucideIconVariants({ className, size })}
+      ref={ref}
+    />
+  )
 );
-Icon.displayName = 'Icon';
+LucideIcon.displayName = 'LucideIcon';

@@ -10,6 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { cn } from '@/utils/cn.util';
+
 import { getCommonPinningStyles } from './utils';
 import { DataTablePagination } from './data-table-pagination';
 
