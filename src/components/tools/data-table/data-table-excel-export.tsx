@@ -28,7 +28,11 @@ export function DataTableExcelExport<T>({
       '../../../utils/export-table-to-csv.util'
     );
 
-    exportTableToCSV(table, { filename: 'financas' });
+    exportTableToCSV(table, {
+      filename: 'financas',
+      excludeColumns: ['select', 'actions'],
+      onlySelected: true,
+    });
   }
 
   return (
