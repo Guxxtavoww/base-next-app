@@ -31,7 +31,6 @@ export function DataTableExcelExport<T>({
     exportTableToCSV(table, {
       filename: 'financas',
       excludeColumns: ['select', 'actions'],
-      onlySelected: true,
     });
   }
 
