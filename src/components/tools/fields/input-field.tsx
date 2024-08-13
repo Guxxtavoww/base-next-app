@@ -10,7 +10,8 @@ import {
 } from '@/components/ui/form';
 import { useFieldId } from '@/hooks/use-field-id.hook';
 import { Input, type InputProps } from '@/components/ui/input';
-import { PasswordInput } from '@/components/ui/password-input';
+
+import PasswordInput from './password-input';
 
 export type InputFieldProps = Omit<
   InputProps,
