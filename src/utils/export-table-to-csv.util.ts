@@ -1,14 +1,13 @@
 import type { Table } from '@tanstack/react-table';
 
+interface ExportTableToCSVArgs<TData> {
+  filename?: string;
+  excludeColumns?: (keyof TData | 'select' | 'actions')[];
+}
+
 export function exportTableToCSV<TData>(
   table: Table<TData>,
-  {
-    filename = 'table',
-    excludeColumns = [],
-  }: {
-    filename?: string;
-    excludeColumns?: (keyof TData | 'select' | 'actions')[];
-  } = {}
+  { filename = 'table', excludeColumns = [] }: ExportTableToCSVArgs<TData> = {}
 ): void {
   const headers = table
     .getAllLeafColumns()
