@@ -12,15 +12,38 @@ import { ToastAction, type ToastActionElement } from '@/components/ui/toast';
 
 import { useToast } from './use-toast.hook';
 
+/**
+ * Options for using a mutation with toast notifications.
+ *
+ * @template TData - The type of data returned by the mutation. Defaults to `unknown`.
+ * @template TError - The type of error returned by the mutation. Defaults to `DefaultError`.
+ * @template TVariables - The type of variables passed to the mutation. Defaults to `void`.
+ * @template TContext - The type of context passed to the mutation. Defaults to `unknown`.
+ */
 export interface UseMutationWithToastOptions<
   TData = unknown,
   TError = DefaultError,
   TVariables = void,
   TContext = unknown
 > extends UseMutationOptions<TData, TError, TVariables, TContext> {
+  /**
+   * Custom error message to display in the toast notification.
+   */
   toastCustomError?: string;
+
+  /**
+   * Custom success message to display in the toast notification.
+   */
   toastCustomSuccessMessage?: string;
+
+  /**
+   * Action element to include in the toast notification.
+   */
   toastAction?: ToastActionElement;
+
+  /**
+   * The maximum number of retry attempts for the mutation.
+   */
   retryLimit?: number;
 }
 
