@@ -9,7 +9,7 @@ import { TanstackProvider } from './tanstack-provider';
 export function Providers({
   children,
   ...props
-}: WithChildren<ThemeProviderProps>) {
+}: WithChildren<ThemeProviderProps>): JSX.Element {
   return (
     <HydrationOverlay>
       <TanstackProvider>

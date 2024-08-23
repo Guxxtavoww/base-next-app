@@ -9,7 +9,7 @@ export function CustomTooltip({
   children,
   tooltipText,
   delay,
-}: CustomTooltipProps) {
+}: CustomTooltipProps): JSX.Element {
   return (
     <Tooltip delayDuration={delay ?? 250}>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
