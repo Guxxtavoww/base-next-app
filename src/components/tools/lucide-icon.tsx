@@ -30,7 +30,7 @@ interface iLucideIconProps extends VariantProps<typeof lucideIconVariants> {
   icon: LucideIconType;
 }
 
-export const LucideIcon = forwardRef<SVGSVGElement, iLucideIconProps>(
+const LucideIcon = forwardRef<SVGSVGElement, iLucideIconProps>(
   ({ icon: PropLucideIcon, className, size }, ref) => (
     <PropLucideIcon
       className={lucideIconVariants({ className, size })}
@@ -39,3 +39,5 @@ export const LucideIcon = forwardRef<SVGSVGElement, iLucideIconProps>(
   )
 );
 LucideIcon.displayName = 'LucideIcon';
+
+export { LucideIcon };

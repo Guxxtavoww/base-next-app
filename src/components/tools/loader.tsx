@@ -18,7 +18,7 @@ const loaderVariants = cva('animate-spin fade-in-10 transition-all', {
   },
 });
 
-export interface iLoaderProps extends VariantProps<typeof loaderVariants> {
+export interface LoaderProps extends VariantProps<typeof loaderVariants> {
   className?: string;
   label?: string;
   wrapperClassName?: ClassValue;
@@ -29,7 +29,7 @@ export function Loader({
   label,
   size,
   wrapperClassName,
-}: iLoaderProps): JSX.Element {
+}: LoaderProps): JSX.Element {
   const LoaderIcon = (
     <LoaderCircle className={loaderVariants({ className, size })} />
   );

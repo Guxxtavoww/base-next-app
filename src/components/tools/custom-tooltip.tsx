@@ -1,3 +1,5 @@
+'use client';
+
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
 
 interface CustomTooltipProps extends WithChildren {

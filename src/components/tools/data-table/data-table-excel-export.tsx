@@ -6,8 +6,8 @@ import type { Table } from '@tanstack/react-table';
 
 import { cn } from '@/utils/cn.util';
 import { Button } from '@/components/ui/button';
-import type { ExportType } from '@/utils/export-table-to-csv.util';
 
+import type { ExportType } from './utils';
 import { LucideIcon } from '../lucide-icon';
 import { CustomTooltip } from '../custom-tooltip';
 
@@ -27,9 +27,7 @@ export function DataTableExcelExport<T>({
   if (!rows.length) return null;
 
   async function exportToExcel() {
-    const { exportTableToCSV } = await import(
-      '../../../utils/export-table-to-csv.util'
-    );
+    const { exportTableToCSV } = await import('./utils');
 
     exportTableToCSV(table, {
       filename: 'financas',
