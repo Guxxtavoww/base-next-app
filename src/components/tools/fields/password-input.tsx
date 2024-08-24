@@ -8,15 +8,15 @@ import { cn } from '@/utils/cn.util';
 import { LucideIcon } from '../lucide-icon';
 import { Input, type InputProps } from '../../ui/input';
 
-export type InputType = 'password' | 'text';
+export type PasswordInputTypes = 'password' | 'text';
 
-interface PasswordInputProps extends Omit<InputProps, 'type' | 'ref'> {
-  defaultType?: InputType;
+export interface PasswordInputProps extends Omit<InputProps, 'type' | 'ref'> {
+  defaultType?: PasswordInputTypes;
 }
 
-const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
+const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ className, defaultType = 'password', ...rest }, ref) => {
-    const [inputType, setInputType] = useState<InputType>(defaultType);
+    const [inputType, setInputType] = useState<PasswordInputTypes>(defaultType);
 
     const toggleInputType = useCallback(() => {
       setInputType((prev) => (prev === 'password' ? 'text' : 'password'));
@@ -47,6 +47,8 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     );
   }
 );
-PasswordInput.displayName = 'PasswordInput';
+PasswordInputComponent.displayName = 'PasswordInput';
 
-export default memo(PasswordInput);
+export const PasswordInput = memo(
+  PasswordInputComponent
+) as typeof PasswordInputComponent;
