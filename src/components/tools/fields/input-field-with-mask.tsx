@@ -3,10 +3,14 @@
 import { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { cn } from '@/utils/cn.util';
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { useFieldId } from '@/hooks/use-field-id.hook';
 import { Input, type InputProps } from '@/components/ui/input';
-import { FormField, FormLabel, FormMessage } from '@/components/ui/form';
 
 export type InputFieldWithMaskProps = Omit<
   InputProps,
@@ -15,6 +19,7 @@ export type InputFieldWithMaskProps = Omit<
   name: string;
   label?: string;
   isRequired?: boolean;
+  // eslint-disable-next-line no-unused-vars
   maskFn: (value: string) => string | undefined;
 };
 
@@ -49,11 +54,7 @@ export function InputFieldWithMask({
       defaultValue={defaultValue}
       disabled={disabled}
       render={({ field: { onChange, value = '', ...field } }) => (
-        <div
-          className={cn('grid w-full items-center gap-1.5', {
-            'max-w-sm': className?.includes('max-w-sm'),
-          })}
-        >
+        <FormItem>
           {label && (
             <FormLabel htmlFor={id} className="relative">
               {label}
@@ -79,7 +80,7 @@ export function InputFieldWithMask({
             autoComplete={`current-${name}`}
           />
           <FormMessage />
-        </div>
+        </FormItem>
       )}
     />
   );
