@@ -31,18 +31,18 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: WithChildren) {
   return (
-    <html lang="pt-br" suppressHydrationWarning>
-      <body className={cn('bg-background antialiased', inter.className)}>
-        <Providers
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+    <Providers
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <html lang="pt-br" suppressHydrationWarning>
+        <body className={cn('bg-background antialiased', inter.className)}>
           {children}
           <Toaster />
-        </Providers>
-      </body>
-    </html>
+        </body>
+      </html>
+    </Providers>
   );
 }
