@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
-import { cn } from '@/utils/cn.util';
 import { Providers } from '@/providers';
 import { Toaster } from '@/components/ui/toaster';
 
-import '../styles/app.styles.css';
+import '../styles/global.styles.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,18 +30,18 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: WithChildren) {
   return (
-    <Providers
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <html lang="pt-br" suppressHydrationWarning>
-        <body className={cn('bg-background antialiased', inter.className)}>
+    <html lang="pt-br" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
           <Toaster />
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }

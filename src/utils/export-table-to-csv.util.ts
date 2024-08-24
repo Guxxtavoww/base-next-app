@@ -1,23 +1,37 @@
 import type { Table } from '@tanstack/react-table';
 
+export type ExportType = 'selected' | 'all' | 'default';
+
 interface ExportTableToCSVArgs<TData> {
   filename?: string;
+  export_type?: ExportType;
   excludeColumns?: (keyof TData | 'select' | 'actions')[];
 }
 
 export function exportTableToCSV<TData>(
   table: Table<TData>,
-  { filename = 'table', excludeColumns = [] }: ExportTableToCSVArgs<TData> = {}
+  {
+    filename = 'table',
+    excludeColumns = [],
+    export_type = 'default',
+  }: ExportTableToCSVArgs<TData> = {}
 ): void {
   const headers = table
     .getAllLeafColumns()
     .map((column) => column.id)
     .filter((id) => !excludeColumns.includes(id as any));
 
+  const defaultRows = table.getRowModel().rows;
   const selectedRows = table.getFilteredSelectedRowModel().rows;
 
   const rows = (
-    selectedRows.length ? selectedRows : table.getRowModel().rows
+    export_type === 'default'
+      ? selectedRows.length
+        ? selectedRows
+        : defaultRows
+      : export_type === 'all'
+      ? defaultRows
+      : selectedRows
   ).map((row) =>
     headers
       .map((header) => {

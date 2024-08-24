@@ -6,6 +6,7 @@ import type { Table } from '@tanstack/react-table';
 
 import { cn } from '@/utils/cn.util';
 import { Button } from '@/components/ui/button';
+import type { ExportType } from '@/utils/export-table-to-csv.util';
 
 import { LucideIcon } from '../lucide-icon';
 import { CustomTooltip } from '../custom-tooltip';
@@ -13,11 +14,13 @@ import { CustomTooltip } from '../custom-tooltip';
 interface DataTableExcelExportProps<T> {
   table: Table<T>;
   className?: string;
+  export_type?: ExportType;
 }
 
 export function DataTableExcelExport<T>({
   table,
   className,
+  export_type,
 }: DataTableExcelExportProps<T>) {
   const rows = useMemo(() => table.getFilteredRowModel().rows, [table]);
 
@@ -31,6 +34,7 @@ export function DataTableExcelExport<T>({
     exportTableToCSV(table, {
       filename: 'financas',
       excludeColumns: ['select', 'actions'],
+      export_type,
     });
   }
 

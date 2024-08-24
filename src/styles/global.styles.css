@@ -72,7 +72,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased min-h-svh overflow-x-hidden;
   }
 
   img {
