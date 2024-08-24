@@ -68,13 +68,7 @@ export function InputFieldWithMask({
             {...field}
             value={value}
             className={className}
-            onChange={(e) => {
-              const inputValue = e.target.value;
-
-              const maskedValue = applyMask(inputValue);
-
-              return onChange(maskedValue);
-            }}
+            onChange={(e) => onChange(applyMask(e.target.value))}
             type="text"
             id={id}
             autoComplete={`current-${name}`}

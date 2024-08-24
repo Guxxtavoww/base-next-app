@@ -11,16 +11,21 @@ import {
 import { useFieldId } from '@/hooks/use-field-id.hook';
 import { Input, type InputProps } from '@/components/ui/input';
 
-import PasswordInput from './password-input';
+import { PasswordInput } from './password-input';
 
-export type InputFieldProps = Omit<
-  InputProps,
-  'name' | 'defaultChecked' | 'id' | 'checked' | 'defaultChecked'
-> & {
+export interface InputFieldProps
+  extends Omit<
+    InputProps,
+    'name' | 'defaultChecked' | 'id' | 'checked' | 'defaultChecked'
+  > {
   name: string;
   label?: string;
+  /**
+   * Please make sure if you have a zod schema, it reflects the behaviour of the schema
+   * @type `boolean`
+   */
   isRequired?: boolean;
-};
+}
 
 export function InputField({
   name,
@@ -42,7 +47,7 @@ export function InputField({
       defaultValue={defaultValue}
       disabled={disabled}
       render={({ field: { onChange, value = '', ...field } }) => (
-        <FormItem className="grid w-full items-center gap-1.5">
+        <FormItem>
           {label ? (
             <FormLabel htmlFor={id} className="relative">
               {label}

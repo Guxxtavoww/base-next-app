@@ -1,6 +1,12 @@
 'use client';
 
-import * as React from 'react';
+import {
+  Children,
+  type HTMLProps,
+  type ChangeEvent,
+  type ReactElement,
+  type ComponentProps,
+} from 'react';
 import { ptBR } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { DayPicker, type DropdownProps } from 'react-day-picker';
@@ -16,7 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+export type CalendarProps = ComponentProps<typeof DayPicker>;
 
 function Calendar({
   className,
@@ -64,9 +70,9 @@ function Calendar({
       }}
       components={{
         Dropdown: ({ value, onChange, children }: DropdownProps) => {
-          const options = React.Children.toArray(
-            children
-          ) as React.ReactElement<React.HTMLProps<HTMLOptionElement>>[];
+          const options = Children.toArray(children) as ReactElement<
+            HTMLProps<HTMLOptionElement>
+          >[];
 
           const selected = options.find((child) => child.props.value === value);
 
@@ -76,7 +82,7 @@ function Calendar({
               onValueChange={(value) => {
                 const changeEvent = {
                   target: { value },
-                } as React.ChangeEvent<HTMLSelectElement>;
+                } as ChangeEvent<HTMLSelectElement>;
 
                 onChange?.(changeEvent);
               }}
