@@ -72,7 +72,7 @@ export function DataTableFilterItem<TData>({
 
   // Create query string
   const createQueryString = useCallback(
-    (params: Record<string, string | number | null>) => {
+    (params: Record<string, Nullable<string | number>>) => {
       const newSearchParams = new URLSearchParams(searchParams?.toString());
 
       for (const [key, value] of Object.entries(params)) {

@@ -4,7 +4,9 @@ declare global {
   export type WithChildren<T extends Record<string, any> = {}> = T &
     Readonly<{ children: ReactNode }>;
 
-  export type Maybe<T> = T | undefined | null;
+  export type Nullable<T> = T | null;
+
+  export type Maybe<T> = Nullable<T> | undefined;
 
   type MyRecord = Record<string, string | undefined>;
 
@@ -26,7 +28,7 @@ declare global {
   export type BaseEntity<T extends Record<string, any>> = {
     id: string;
     created_at: string;
-    updated_at: string | null;
+    updated_at: Nullable<string>;
   } & T;
 
   export interface PaginationMeta {
