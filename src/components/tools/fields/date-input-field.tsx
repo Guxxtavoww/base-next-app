@@ -4,13 +4,6 @@ import { useState } from 'react';
 import { CalendarIcon } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
-import { Button } from '@/components/ui/button';
-import { Calendar, type CalendarProps } from '@/components/ui/calendar';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import {
   FormControl,
   FormField,
@@ -18,8 +11,15 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { cn } from '@/utils/cn.util';
+import { Button } from '@/components/ui/button';
 import { type Formats, formatToDate } from '@/utils/date.utils';
+import { Calendar, type CalendarProps } from '@/components/ui/calendar';
 
 export interface DateInputFieldProps {
   name: string;
