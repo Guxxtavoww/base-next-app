@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Base Next.js App
 
-## Getting Started
+This project is a modern Next.js 14 application using the App Router. It is configured with essential dependencies and tools to build a high-performance web application.
 
-First, run the development server:
+## Table of Contents
+
+- [Installation](#installation)
+- [Scripts](#scripts)
+- [Project Structure](#project-structure)
+- [Dependencies](#dependencies)
+- [DevDependencies](#devdependencies)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+To get started, clone the repository and install the dependencies using your preferred package manager (e.g., `npm`, `yarn`, `pnpm`). Have in mind that this project was created using `pnpm`.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/base-next-app.git
+cd base-next-app
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The following scripts are available in the `package.json` file:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **`dev`**: Starts the development server.
+- **`build`**: Builds the application for production.
+- **`start`**: Starts the production server.
+- **`lint`**: Runs ESLint to check for code quality issues.
+- **`test`**: Runs the Jest test suite.
+- **`test:watch`**: Runs the Jest test suite in watch mode.
 
-## Learn More
+To run a script, use:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm run <script-name>
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The project is organized as follows:
 
-## Deploy on Vercel
+```plaintext
+base-next-app/
+├── app/                # App Router directory
+│   ├── layout.tsx      # Main layout for the app
+│   ├── page.tsx        # Main page component
+│   └── ...             # Additional pages and components
+├── components/         # Reusable UI components
+├── hooks/              # Custom React hooks
+├── public/             # Public assets (e.g., images, fonts)
+├── styles/             # Global styles and Tailwind configuration
+├── __tests__/              # Jest test files
+├── .eslintrc.jsson        # ESLint configuration
+├── jest.config.ts      # Jest configuration
+├── next.config.mjs      # Next.js configuration
+├── package.json        # Project dependencies and scripts
+└── tsconfig.json       # TypeScript configuration
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Key Directories
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **`app/`**: Contains the App Router components, pages, and API routes.
+- **`components/`**: Holds reusable UI components.
+- **`hooks/`**: Contains custom React hooks.
+- **`lib/`**: Includes utility functions and other libraries.
+- **`styles/`**: Holds global styles and TailwindCSS configuration.
+
+## Dependencies
+
+- **`@builder.io/react-hydration-overlay`**: Hydration management for React.
+- **`@hookform/resolvers`**: Validation resolvers for React Hook Form.
+- **`@radix-ui/*`**: Radix UI components for building accessible UIs.
+- **`@tanstack/react-query`**: Data-fetching and state management.
+- **`@tanstack/react-table`**: Table component for data grids.
+- **`classnames`, `clsx`**: Utility for conditionally joining classNames.
+- **`date-fns`**: Date utility library.
+- **`jsonwebtoken`**: JSON Web Token implementation.
+- **`lucide-react`**: Icon set for React applications.
+- **`next`, `react`, `react-dom`**: Core libraries for a Next.js app.
+- **`react-hook-form`**: Forms management library for React.
+- **`tailwind-merge`**: Utility to merge Tailwind CSS classes.
+- **`tailwindcss-animate`**: Animation utilities for Tailwind CSS.
+- **`zod`**: Schema validation library.
+- **`zustand`**: State management library.
+
+## DevDependencies
+
+- **`@testing-library/*`**: Utilities for testing React components.
+- **`@types/*`**: TypeScript type definitions for various libraries.
+- **`eslint`, `eslint-config-next`**: ESLint and Next.js specific linting rules.
+- **`jest`, `jest-environment-jsdom`**: JavaScript testing framework.
+- **`tailwindcss`, `postcss`**: CSS framework and PostCSS for processing styles.
+- **`ts-node`, `typescript`**: TypeScript compiler and Node.js support.
+
+## Features
+
+- **App Router**: Utilizes the Next.js 14 App Router for improved routing and layouts.
+- **TailwindCSS**: Fully configured TailwindCSS for utility-first styling.
+- **Radix UI**: Accessible UI components for building modern interfaces.
+- **React Query**: Integrated data-fetching and state management.
+- **TypeScript**: Full TypeScript support for type safety and development efficiency.
+- **Testing**: Set up with Jest and Testing Library for robust unit and integration testing.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request with any improvements or fixes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+This `README.md` provides an overview of the project, including setup instructions, project structure, key dependencies, and additional features relevant to the Next.js 14 app using the App Router.
