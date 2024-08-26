@@ -46,20 +46,25 @@ The project is organized as follows:
 
 ```plaintext
 base-next-app/
-├── app/                # App Router directory
-│   ├── layout.tsx      # Main layout for the app
-│   ├── page.tsx        # Main page component
-│   └── ...             # Additional pages and components
-├── components/         # Reusable UI components
-├── hooks/              # Custom React hooks
-├── public/             # Public assets (e.g., images, fonts)
-├── styles/             # Global styles and Tailwind configuration
-├── __tests__/              # Jest test files
-├── .eslintrc.jsson        # ESLint configuration
-├── jest.config.ts      # Jest configuration
-├── next.config.mjs      # Next.js configuration
-├── package.json        # Project dependencies and scripts
-└── tsconfig.json       # TypeScript configuration
+├── public/               # Public assets (e.g., images, fonts)
+├── src/
+    ├── __tests__/            # Jest test files
+    ├── @types/               # Global types
+    ├── app/                  # App Router directory
+    │   ├── layout.tsx        # Main layout for the app
+    │   ├── page.tsx          # Main page component
+    │   └── ...               # Additional pages and components
+    ├── components/           # App's components
+    │   ├── ui                # Shadcn's components
+    │   ├── tools             # Reusable Utilities
+    ├── hooks/                # Custom React hooks
+    ├── styles/               # Global styles and Tailwind configuration
+    ├── providers/            # The apps data providers./
+├── .eslintrc.json        # ESLint configuration
+├── jest.config.ts        # Jest configuration
+├── next.config.mjs       # Next.js configuration
+├── package.json          # Project dependencies and scripts
+└── tsconfig.json         # TypeScript configuration
 ```
 
 ### Key Directories
