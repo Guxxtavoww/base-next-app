@@ -55,14 +55,14 @@ export function InputFieldWithMask({
       disabled={disabled}
       render={({ field: { onChange, value = '', ...field } }) => (
         <FormItem>
-          {label && (
+          {label ? (
             <FormLabel htmlFor={id} className="relative">
               {label}
               {isRequired ? (
                 <strong className="absolute -top-0.5 text-red-600">*</strong>
               ) : null}
             </FormLabel>
-          )}
+          ) : null}
           <Input
             {...rest}
             {...field}

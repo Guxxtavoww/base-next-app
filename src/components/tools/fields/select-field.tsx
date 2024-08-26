@@ -15,17 +15,20 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export type SelectFieldProps<T extends Record<string, any>> = {
+export interface SelectFieldProps<
+  TData extends Record<string, any>,
+  Keys extends keyof TData = keyof TData
+> {
   name: string;
-  defaultValue?: T[keyof T];
-  options: T[];
+  defaultValue?: TData[Keys];
+  options: TData[];
   disabled?: boolean;
-  labelAccessor: keyof T;
-  valueAccessor: keyof T;
+  labelAccessor: Keys;
+  valueAccessor: Keys;
   selectLabel?: string;
   placeholder?: string;
   className?: string;
-};
+}
 
 export function SelectField<T extends Record<string, any>>({
   labelAccessor,
@@ -48,7 +51,7 @@ export function SelectField<T extends Record<string, any>>({
       disabled={disabled}
       render={({ field }) => (
         <FormItem className={className}>
-          {selectLabel && <FormLabel>{selectLabel}</FormLabel>}
+          {selectLabel ? <FormLabel>{selectLabel}</FormLabel> : null}
           <Select
             value={field.value ?? ''}
             onValueChange={field.onChange}
