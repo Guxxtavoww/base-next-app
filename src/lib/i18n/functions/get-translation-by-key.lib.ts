@@ -17,12 +17,12 @@ export function getTranslationValue(
   if (typeof translation === 'string') return translation;
 
   // Translation doesn't exist or keys array is empty, return an empty string.
-  if (!translation || keys.length === 0) return '';
+  if (!translation || keys.length === 0) return 'Invalid Translation';
 
   // Assing first key in keys array and remove it from keys array.
   const key: string = keys.shift() || '';
 
-  if (!translation[key]) return '';
+  if (!translation[key]) return 'Invalid Translation Value';
 
   // Recursively call itself with remaining keys.
   return getTranslationValue(keys, translation[key]);
