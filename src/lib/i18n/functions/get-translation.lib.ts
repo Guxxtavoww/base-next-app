@@ -5,6 +5,7 @@ import type { Locale } from '@/config/i18n.config';
 import {
   loadTranslation,
   type TranslationObejct,
+  type Translation,
 } from './load-translation.lib';
 import { getTranslationByKey } from './get-translation-by-key.lib';
 
@@ -20,5 +21,6 @@ export default async function getTranslation(
   const translation = await loadTranslation(locale);
 
   // Return translation data.
-  return (key: string) => getTranslationByKey(key, translation);
+  return (key: ObjectKeys<Translation>) =>
+    getTranslationByKey(key, translation);
 }

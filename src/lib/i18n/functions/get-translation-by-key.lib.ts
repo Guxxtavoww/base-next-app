@@ -1,3 +1,5 @@
+import type { Translation } from './load-translation.lib';
+
 export type TranslationKeyValue = {
   [key: string]: string | TranslationKeyValue;
 };
@@ -33,7 +35,7 @@ export function getTranslationValue(
  * @returns Translation value in string.
  */
 export function getTranslationByKey(
-  key: string,
+  key: ObjectKeys<Translation>,
   translation: TranslationKeyValue
 ): string {
   const keys = key.split('.');
