@@ -6,8 +6,8 @@ import { getMatchingLocale } from './lib/i18n/functions/get-matching-locale.lib'
 export default function middleware(request: NextRequest) {
   // Loop through available locales in i18n config, set to true when
   // iterated locale is not found in current request url.
-  const localeNotFound: boolean = i18nConfig.locales.every(
-    (locale: Locale) =>
+  const localeNotFound = i18nConfig.locales.every(
+    (locale) =>
       !request.nextUrl.pathname.startsWith(`/${locale}/`) &&
       request.nextUrl.pathname !== `/${locale}`
   );
