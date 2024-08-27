@@ -10,7 +10,7 @@ import { type Locale, i18nConfig } from '@/config/i18n.config';
  * @returns
  */
 export function getMatchingLocale(request: NextRequest): Locale {
-  let userHeaders: Record<string, string> = {};
+  const userHeaders: Record<string, string> = {};
 
   request.headers.forEach(
     (headerValue, headerKey) => (userHeaders[headerKey] = headerValue)
