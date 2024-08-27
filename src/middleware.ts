@@ -1,28 +1,30 @@
-'use server';
+import { NextRequest, NextResponse } from 'next/server';
 
-import Negotiator from 'negotiator';
-import { NextRequest } from 'next/server';
-import { match } from '@formatjs/intl-localematcher';
+import { type Locale, i18nConfig } from './config/i18n.config';
+import { getMatchingLocale } from './lib/i18n/functions/get-matching-locale.lib';
 
-const headers = { 'accept-language': 'en-US,en;q=0.5' };
-const languages = new Negotiator({ headers }).languages();
-const locales = ['pt-br', 'en-US'] as const;
-const defaultLocale: Locales = locales[0];
-
-export type Locales = (typeof locales)[number];
-
-export function getLocale(request: NextRequest) {
-  return match(languages, locales, defaultLocale);
-}
-
-export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+export default function middleware(request: NextRequest) {
+  // Loop through available locales in i18n config, set to true when
+  // iterated locale is not found in current request url.
+  const localeNotFound: boolean = i18nConfig.locales.every(
+    (locale: Locale) =>
+      !request.nextUrl.pathname.startsWith(`/${locale}/`) &&
+      request.nextUrl.pathname !== `/${locale}`
   );
 
-  if (pathnameHasLocale) return;
+  // Locale not found in request url, redirect to matched locale url.
+  if (localeNotFound) {
+    const newLocale: Locale = getMatchingLocale(request);
 
-  const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
+    // Return new url redirect and redirect user to correct locale url.
+    return NextResponse.redirect(
+      new URL(`/${newLocale}/${request.nextUrl.pathname}`, request.url)
+    );
+  }
 }
+
+// TODO: For apps that require auth, this will have to be refactored
+export const config = {
+  // Matcher ignoring /_next/ and /api/
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+};

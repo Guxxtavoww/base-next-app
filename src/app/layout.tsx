@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 
 import { Providers } from '@/providers';
 import { Toaster } from '@/components/ui/toaster';
+import { i18nConfig } from '@/config/i18n.config';
 
 import '../styles/global.styles.css';
 
@@ -28,9 +29,16 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout({ children }: WithChildren) {
+export async function generateStaticParams() {
+  return i18nConfig.locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({
+  children,
+  params,
+}: WithChildren<ServerComponentPageProps>) {
   return (
-    <html lang="pt-br" suppressHydrationWarning>
+    <html lang={params.locale} suppressHydrationWarning>
       <body className={inter.className}>
         <Providers
           attribute="class"

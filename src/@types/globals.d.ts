@@ -1,3 +1,4 @@
+import type { Locale } from '@/config/i18n.config';
 import type { ReactNode, Dispatch, SetStateAction } from 'react';
 
 declare global {
@@ -23,7 +24,7 @@ declare global {
   /**
    * Type for an object with string keys and values that are either strings or undefined.
    */
-  type MyRecord = Record<string, string | undefined>;
+  type MyRecord = Record<string, string | undefined> & { locale: Locale };
 
   /**
    * Type for the state setter function returned by the `useState` hook.
@@ -116,4 +117,19 @@ declare global {
     filterOperator?: string;
     isMulti?: boolean;
   }
+
+  export type ObjectKeys<
+    T extends Record<string, unknown>,
+    Key = keyof T
+  > =
+    // Check if key is a string.
+    Key extends string
+      ? // Continue to check if key has nested objects.
+        T[Key] extends Record<string, unknown>
+        ? // If nested object is found, recursively run the ObjectKeys on it.
+          `${Key}.${ObjectKeys<T[Key]>}`
+        : // If nested object is not found, return the key.
+          `${Key}`
+      : // Return nothing.
+        never;
 }
