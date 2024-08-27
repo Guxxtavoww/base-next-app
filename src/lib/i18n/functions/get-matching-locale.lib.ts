@@ -18,15 +18,9 @@ export function getMatchingLocale(request: NextRequest): Locale {
 
   const clientLocales = new Negotiator({ headers: userHeaders }).languages();
 
-  let appLocales: Locale[] = [];
-
-  for (const locale of i18nConfig.locales) {
-    appLocales.push(locale);
-  }
-
   const localeMatch: Locale = match(
     clientLocales,
-    appLocales,
+    i18nConfig.locales,
     i18nConfig.defaultLocale
   ) as Locale;
 
