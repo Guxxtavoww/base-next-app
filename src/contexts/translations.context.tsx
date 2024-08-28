@@ -35,7 +35,7 @@ export function TranslationProvider({ children }: WithChildren) {
   const translation = useCallback(
     (key: ObjectKeys<Translation>) =>
       isLoading ? (
-        <Skeleton className="h-3 w-full inline" />
+        <Skeleton className="h-3 w-full max-w-8 inline" />
       ) : (
         String(data?.(key))
       ),
