@@ -9,7 +9,7 @@ export default async function Home({
   const translation = await getTranslationServerSide(locale);
 
   return (
-    <main className="min-h-svh p-2 space-y-2">
+    <main className="min-h-svh p-2 space-y-3">
       <h1>{translation('common_texts.greet')}</h1>
       <Button>{translation('common_texts.submit')}</Button>
       <ClientComponent />

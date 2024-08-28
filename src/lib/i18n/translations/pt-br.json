@@ -4,5 +4,10 @@
     "greet": "Bem vindo(a) a página principal do app",
     "client_component": "Isso é um client-component",
     "change_lang": "Escolha a linguagem"
+  },
+  "not_found_page_texts": {
+    "title": "Rota Inválida",
+    "description": "Não achamos essa rota!",
+    "button_text": "Vá para uma rota válida aqui."
   }
 }

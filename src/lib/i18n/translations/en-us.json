@@ -4,5 +4,10 @@
     "greet": "Welcome to the home page!",
     "client_component": "This is a client-component",
     "change_lang": "Choose a language"
+  },
+  "not_found_page_texts": {
+    "title": "Invalid route",
+    "description": "Could not find requested resource",
+    "button_text": "Go to a valid route here."
   }
 }
