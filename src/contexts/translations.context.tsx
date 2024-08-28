@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { createContext, useCallback, useContext, useMemo } from 'react';
@@ -12,6 +13,8 @@ import type { Translation } from '@/lib/i18n/functions/load-translation.lib';
 interface TranslationContextProps {
   // eslint-disable-next-line no-unused-vars
   translation: (key: ObjectKeys<Translation>) => string | JSX.Element;
+  // eslint-disable-next-line no-unused-vars
+  changeTranslation: (lang: Locale) => void;
   isLoading: boolean;
 }
 
@@ -19,6 +22,7 @@ export const TranslationContext =
   createContext<Nullable<TranslationContextProps>>(null);
 
 export function TranslationProvider({ children }: WithChildren) {
+  const router = useRouter();
   const pathname = usePathname();
   const locale = useMemo(() => pathname.split('/')[1] as Locale, [pathname]);
 
@@ -37,8 +41,19 @@ export function TranslationProvider({ children }: WithChildren) {
     [data, isLoading]
   );
 
+  const changeTranslation = useCallback(
+    (lang: Locale) => {
+      if (locale === lang) return;
+
+      router.replace(pathname.replace(locale, lang), { scroll: false });
+    },
+    [locale, router, pathname]
+  );
+
   return (
-    <TranslationContext.Provider value={{ translation, isLoading }}>
+    <TranslationContext.Provider
+      value={{ translation, isLoading, changeTranslation }}
+    >
       {children}
     </TranslationContext.Provider>
   );

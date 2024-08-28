@@ -2,6 +2,7 @@
   "common_texts": {
     "submit": "Enviar",
     "greet": "Bem vindo(a) a página principal do app",
-    "client_component": "Isso é um client-component"
+    "client_component": "Isso é um client-component",
+    "change_lang": "Escolha a linguagem"
   }
 }

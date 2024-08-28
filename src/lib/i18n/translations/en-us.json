@@ -2,6 +2,7 @@
   "common_texts": {
     "submit": "Submit",
     "greet": "Welcome to the home page!",
-    "client_component": "This is a client-component"
+    "client_component": "This is a client-component",
+    "change_lang": "Choose a language"
   }
 }
