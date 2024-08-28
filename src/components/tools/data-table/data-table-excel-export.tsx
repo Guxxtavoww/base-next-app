@@ -8,7 +8,7 @@ import { cn } from '@/utils/cn.util';
 import { Button } from '@/components/ui/button';
 
 import type { ExportType } from './utils';
-import { LucideIcon } from '../lucide-icon';
+import { lucide-reactIcon } from '../lucide-react-icon';
 import { CustomTooltip } from '../custom-tooltip';
 
 interface DataTableExcelExportProps<T> {
@@ -43,7 +43,7 @@ export function DataTableExcelExport<T>({
         variant="outline"
         onClick={exportToExcel}
       >
-        <LucideIcon icon={ArrowRightFromLine} size="sm" />
+        <lucide-reactIcon icon={ArrowRightFromLine} size="sm" />
         Exportar
       </Button>
     </CustomTooltip>

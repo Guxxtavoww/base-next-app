@@ -5,7 +5,7 @@ import { Eye, EyeOff } from 'lucide-react';
 
 import { cn } from '@/utils/cn.util';
 
-import { LucideIcon } from '../lucide-icon';
+import { lucide-reactIcon } from '../lucide-react-icon';
 import { Input, type InputProps } from '../../ui/input';
 
 export type PasswordInputTypes = 'password' | 'text';
@@ -38,7 +38,7 @@ const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>(
           onClick={toggleInputType}
           aria-label={`Toggle password visibility`}
         >
-          <LucideIcon
+          <lucide-reactIcon
             icon={inputType === 'password' ? EyeOff : Eye}
             size="sm"
           />
