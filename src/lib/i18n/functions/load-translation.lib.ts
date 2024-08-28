@@ -3,7 +3,7 @@ import { type Locale, i18nConfig } from '@/config/i18n.config';
 const translations = {
   'en-US': () => import('../translations/en-us.json'),
   'pt-br': () => import('../translations/pt-br.json'),
-} satisfies Record<Locale, () => Promise<object>>;
+} satisfies Record<Locale, Function>;
 
 // Define a generated type for translation object.
 export type Translation = Awaited<
