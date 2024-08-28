@@ -16,6 +16,7 @@ interface TranslationContextProps {
   // eslint-disable-next-line no-unused-vars
   changeTranslation: (lang: Locale) => void;
   isLoading: boolean;
+  currentLocale: Locale;
 }
 
 export const TranslationContext =
@@ -52,7 +53,12 @@ export function TranslationProvider({ children }: WithChildren) {
 
   return (
     <TranslationContext.Provider
-      value={{ translation, isLoading, changeTranslation }}
+      value={{
+        translation,
+        isLoading,
+        changeTranslation,
+        currentLocale: locale,
+      }}
     >
       {children}
     </TranslationContext.Provider>
