@@ -29,7 +29,11 @@ export function TranslationProvider({ children }: WithChildren) {
 
   const translation = useCallback(
     (key: ObjectKeys<Translation>) =>
-      isLoading ? <Skeleton className="h-3 w-full inline" /> : data?.(key) ?? '',
+      isLoading ? (
+        <Skeleton className="h-3 w-full inline" />
+      ) : (
+        String(data?.(key))
+      ),
     [data, isLoading]
   );
 
