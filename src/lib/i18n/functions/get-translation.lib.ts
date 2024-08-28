@@ -1,11 +1,9 @@
-import 'server-only';
-
 import type { Locale } from '@/config/i18n.config';
 
 import {
   loadTranslation,
-  type TranslationObejct,
   type Translation,
+  type TranslationObejct,
 } from './load-translation.lib';
 import { getTranslationByKey } from './get-translation-by-key.lib';
 
