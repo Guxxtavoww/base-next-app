@@ -1,13 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter, usePathname } from 'next/navigation';
 import { createContext, useCallback, useContext, useMemo } from 'react';
 
 import type { Locale } from '@/config/i18n.config';
 import { Skeleton } from '@/components/ui/skeleton';
-import getTranslation from '@/lib/i18n/functions/get-translation.lib';
+import { getTranslation } from '@/lib/i18n/functions/get-translation.lib';
 import type { Translation } from '@/lib/i18n/functions/load-translation.lib';
 
 interface TranslationContextProps {
@@ -25,11 +24,18 @@ export const TranslationContext =
 export function TranslationProvider({ children }: WithChildren) {
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useMemo(() => pathname.split('/')[1] as Locale, [pathname]);
+  const currentLocale = useMemo(
+    () => pathname.split('/')[1] as Locale,
+    [pathname]
+  );
 
   const { data, isLoading } = useQuery({
-    queryKey: ['get-translation', locale],
-    queryFn: async () => getTranslation(locale),
+    queryKey: ['get-translation', currentLocale],
+    queryFn: async () => getTranslation(currentLocale),
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+    refetchIntervalInBackground: false,
   });
 
   const translation = useCallback(
@@ -44,11 +50,11 @@ export function TranslationProvider({ children }: WithChildren) {
 
   const changeTranslation = useCallback(
     (lang: Locale) => {
-      if (locale === lang) return;
+      if (currentLocale === lang) return;
 
-      router.replace(pathname.replace(locale, lang), { scroll: false });
+      router.replace(pathname.replace(currentLocale, lang), { scroll: false });
     },
-    [locale, router, pathname]
+    [currentLocale, router]
   );
 
   return (
@@ -57,7 +63,7 @@ export function TranslationProvider({ children }: WithChildren) {
         translation,
         isLoading,
         changeTranslation,
-        currentLocale: locale,
+        currentLocale,
       }}
     >
       {children}

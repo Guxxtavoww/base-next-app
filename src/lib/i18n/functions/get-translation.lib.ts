@@ -12,7 +12,7 @@ import { getTranslationByKey } from './get-translation-by-key.lib';
  * @param locale
  * @returns
  */
-export default async function getTranslation(
+export async function getTranslation(
   locale: Locale
 ): Promise<TranslationObejct> {
   // Load translation content from a file based on locale.
