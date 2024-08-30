@@ -17,15 +17,17 @@ export function LanguageDropdown() {
 
   return (
     <div className="flex flex-col mt-4 gap-3.5">
-      <Label>{translation('default.common_texts.change_lang')}</Label>
+      <Label htmlFor="language">
+        {translation('common_texts.change_lang')}
+      </Label>
       <Select value={currentLocale} onValueChange={changeTranslation}>
-        <SelectTrigger className="max-w-xs">
+        <SelectTrigger className="max-w-xs" id="language">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          {locales.map((item) => (
-            <SelectItem key={item} value={item}>
-              {item}
+          {locales.map((locale) => (
+            <SelectItem key={locale} value={locale}>
+              {locale}
             </SelectItem>
           ))}
         </SelectContent>
