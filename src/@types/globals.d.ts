@@ -78,7 +78,7 @@ declare global {
    * Type for a paginated response.
    * @template T - The type of the items in the paginated response.
    */
-  export interface PaginationResponse<T> {
+  export interface PaginatedResponse<T> {
     items: T[];
     meta: PaginationMeta;
   }
