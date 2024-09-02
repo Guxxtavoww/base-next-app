@@ -20,7 +20,7 @@ export default function NotFound() {
       <h2>{translation('not_found_page_texts.title')}</h2>
       <p>{translation('not_found_page_texts.description')}</p>
       <CustomLink href="/" className="max-w-fit">
-        {translation('default.not_found_page_texts.button_text')}
+        {translation('not_found_page_texts.button_text')}
       </CustomLink>
     </div>
   );
