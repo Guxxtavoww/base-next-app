@@ -29,7 +29,7 @@ export function TranslationProvider({ children }: WithChildren) {
     [pathname]
   );
 
-  const { data, isLoading } = useQuery({
+  const { data: getTranslationFn, isLoading } = useQuery({
     queryKey: ['get-translation', currentLocale],
     queryFn: async () => getTranslation(currentLocale),
     refetchOnMount: false,
@@ -43,9 +43,9 @@ export function TranslationProvider({ children }: WithChildren) {
       isLoading ? (
         <Skeleton className="h-3 w-full max-w-8 inline" />
       ) : (
-        String(data?.(key))
+        String(getTranslationFn?.(key))
       ),
-    [data, isLoading]
+    [getTranslationFn, isLoading]
   );
 
   const changeTranslation = useCallback(
