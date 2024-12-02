@@ -26,6 +26,10 @@ interface Breakpoints {
   active: 'SSR' | 'xs' | 'sm' | 'md' | 'lg';
 }
 
+const MAX_WIDTH_XS = 640;
+const MAX_WIDTH_SM = 768;
+const MAX_WIDTH_MD = 1024;
+
 /**
  * Custom hook that determines the current responsive breakpoint based on screen width.
  *
@@ -39,10 +43,10 @@ export function useBreakpoints(): Breakpoints {
   const [isClient, setIsClient] = useState<boolean>(false);
 
   const breakpoints: Breakpoints = {
-    isXs: useMediaQuery('(max-width: 640px)'),
-    isSm: useMediaQuery('(min-width: 641px) and (max-width: 768px)'),
-    isMd: useMediaQuery('(min-width: 769px) and (max-width: 1024px)'),
-    isLg: useMediaQuery('(min-width: 1025px)'),
+    isXs: useMediaQuery({ maxWidth: MAX_WIDTH_XS }),
+    isSm: useMediaQuery({ minWidth: MAX_WIDTH_XS + 1, maxWidth: MAX_WIDTH_SM }),
+    isMd: useMediaQuery({ minWidth: MAX_WIDTH_SM + 1, maxWidth: MAX_WIDTH_MD }),
+    isLg: useMediaQuery({ minWidth: MAX_WIDTH_MD + 1 }),
     active: 'SSR',
   };
 

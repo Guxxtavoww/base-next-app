@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-type AllParamsType<T extends string> = Record<T, Maybe<string>>;
+export type AllParamsType<T extends string> = Record<T, Maybe<string>>;
 
 /**
  * Type definition for a single query parameter configuration.

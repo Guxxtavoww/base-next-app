@@ -1,6 +1,5 @@
 'use client';
 
-import { z } from 'zod';
 import {
   getCoreRowModel,
   getFacetedRowModel,
@@ -19,11 +18,12 @@ import {
 import { useState, useMemo, useEffect } from 'react';
 
 import {
+  z,
   optionalStringSchema,
   optionalStringToNumberSchema,
-} from '@/utils/zod.utils';
-import { useDebounce } from '@/hooks/use-debounce.hook';
+} from '@repo/shared/index';
 
+import { useDebounce } from './use-debounce.hook';
 import { useSearchParamsManager } from './use-search-params-manager.hook';
 
 type UseDataTablePropsExteds<TData> = Omit<
@@ -89,11 +89,11 @@ export function useDataTable<TData>({
     return Object.entries(getAllParamsValues()).reduce<ColumnFiltersState>(
       (filters, [key, value]) => {
         const filterableColumn = filterableColumns.find(
-          (column) => column.value === key
+          (column) => column.value === key,
         );
 
         const searchableColumn = searchableColumns.find(
-          (column) => column.value === key
+          (column) => column.value === key,
         );
 
         if (filterableColumn) {
@@ -110,7 +110,7 @@ export function useDataTable<TData>({
 
         return filters;
       },
-      []
+      [],
     );
   }, [filterableColumns, searchableColumns, getAllParamsValues]);
 
@@ -129,7 +129,7 @@ export function useDataTable<TData>({
       pageIndex,
       pageSize,
     }),
-    [pageIndex, pageSize]
+    [pageIndex, pageSize],
   );
 
   const [sorting, setSorting] = useState<SortingState>([
@@ -146,7 +146,7 @@ export function useDataTable<TData>({
       'sort',
       sorting[0]?.id
         ? `${sorting[0]?.id}.${sorting[0]?.desc ? 'desc' : 'asc'}`
-        : ''
+        : '',
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex, pageSize, sorting]);
@@ -156,10 +156,10 @@ export function useDataTable<TData>({
       JSON.stringify(
         columnFilters.filter((filter) => {
           return searchableColumns.find((column) => column.value === filter.id);
-        })
+        }),
       ),
-      500
-    )
+      500,
+    ),
   ) as ColumnFiltersState;
 
   const filterableColumnFilters = columnFilters.filter((filter) => {

@@ -1,5 +1,9 @@
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import type { ThemeProviderProps } from 'next-themes/dist/types';
+'use client';
+
+import {
+  type ThemeProviderProps,
+  ThemeProvider as NextThemesProvider,
+} from 'next-themes';
 import { HydrationOverlay } from '@builder.io/react-hydration-overlay';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
