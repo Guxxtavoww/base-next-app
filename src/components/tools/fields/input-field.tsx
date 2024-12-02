@@ -73,8 +73,15 @@ export function InputField({
               value={value}
               className={className}
               onChange={(e) => {
-                const inputValue = e.target.value;
-                onChange(type === 'number' ? +inputValue : inputValue);
+                let inputValue: string | number = e.target.value;
+
+                if (type === 'number') {
+                  if (Number.isNaN(+inputValue)) return onChange('');
+
+                  inputValue = Number(inputValue);
+                }
+
+                onChange(inputValue);
               }}
               type={type}
               id={id}
